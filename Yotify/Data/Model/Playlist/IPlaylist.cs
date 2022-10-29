@@ -1,6 +1,6 @@
-﻿using Yotify.Model.MediaItem;
+﻿using Yotify.Data.Model.MediaItem;
 
-namespace Yotify.Model.Playlist
+namespace Yotify.Data.Model.Playlist
 {
     internal interface IPlaylist
     {

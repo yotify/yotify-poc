@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Yotify.Model.MediaItem
+namespace Yotify.Data.Model.MediaItem
 {
     internal interface IMediaItem
     {

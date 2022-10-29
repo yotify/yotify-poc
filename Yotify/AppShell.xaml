@@ -8,6 +8,7 @@
 
     <ShellContent
         Title="Yotify"
+        Shell.NavBarIsVisible="True"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
