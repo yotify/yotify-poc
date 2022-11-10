@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Yotify.Data.Model.MediaItem
+namespace Yotify.Data.Model.MediaItem;
+
+public interface IMediaItem
 {
-    internal interface IMediaItem
-    {
-        string Name { get; set; }
+    string Name { get; set; }
 
-        string Description { get; set; }
+    string Description { get; set; }
 
-        string MediaImageURL { get; set; }
+    string MediaImageURL { get; set; }
 
-        string MediaURL { get; set; }
-    }
+    string MediaURL { get; set; }
 }

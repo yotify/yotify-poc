@@ -1,17 +1,16 @@
 ﻿using Yotify.Data.Model.MediaItem;
 
-namespace Yotify.Data.Model.Playlist
+namespace Yotify.Data.Model.Playlist;
+
+public interface IPlaylist
 {
-    internal interface IPlaylist
-    {
-        string Name { get; set; }
+    string Name { get; set; }
 
-        string Description { get; set; }
+    string Description { get; set; }
 
-        string PlaylistURL { get; set; }
+    string PlaylistURL { get; set; }
 
-        string ThumbnailURL { get; set; }
+    string ThumbnailURL { get; set; }
 
-        List<IMediaItem> MediaItems { get; set; }
-    }
+    List<IMediaItem> MediaItems { get; set; }
 }

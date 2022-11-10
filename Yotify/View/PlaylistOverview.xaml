@@ -2,40 +2,56 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:Yotify.Data.Model.Playlist"
+             xmlns:viewmodel="clr-namespace:Yotify.ViewModel"
+             x:DataType="viewmodel:PlaylistOverviewViewModel"
+             Title="{Binding}"
              x:Class="Yotify.View.PlaylistOverview">
-    <CollectionView>
-        <CollectionView.ItemsSource>
-            <x:Array Type="{x:Type model:IPlaylist}">
-                <model:YoutubePlaylist
-                    Name="Playlist 1"
-                    PlaylistURL="test_https://www.test.com/playlists/playlist1"
-                    ThumbnailURL=""
-                    />
-                <model:YoutubePlaylist
-                    Name="Playlist 2"
-                    PlaylistURL="test_https://www.test.com/playlists/playlist2"
-                    ThumbnailURL=""
-                    />
-                <model:YoutubePlaylist
-                    Name="Playlist 3"
-                    PlaylistURL="test_https://www.test.com/playlists/playlist3"
-                    ThumbnailURL=""
-                    />
-            </x:Array>
-        </CollectionView.ItemsSource>
-        <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="model:YoutubePlaylist">
-                <HorizontalStackLayout>
-                    <Image Source="{Binding ThumbnailURL}"
-                           HeightRequest="100"
-                           WidthRequest="100"
-                           Aspect="AspectFill"/>
-                    <VerticalStackLayout Padding="10">
-                        <Label Text="{Binding Name}" FontSize="24"/>
-                        <Label Text="{Binding PlaylistURL}" FontSize="10"/>
-                    </VerticalStackLayout>
-                </HorizontalStackLayout>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+
+    <Grid ColumnDefinitions="*,*"
+            ColumnSpacing="5"
+            RowDefinitions="*, Auto"
+            RowSpacing="0">
+
+        <CollectionView BackgroundColor="Transparent"
+                        Grid.ColumnSpan="2"
+                        ItemsSource="{Binding Playlists}"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:YoutubePlaylist">
+                    <Grid Padding="10">
+                        <Frame HeightRequest="125">
+                            <Grid Padding="0"
+                                    ColumnDefinitions="125, *">
+                                <Image Aspect="AspectFill"
+                                        Source="{Binding ThumbnailURL}"
+                                        WidthRequest="125"
+                                        HeightRequest="125"/>
+
+                                <VerticalStackLayout Grid.Column="1"
+                                                     Padding="10"
+                                                     VerticalOptions="Center">
+                                    <Label Text="{Binding Name}"/>
+                                    <Label Text="{Binding PlaylistURL}"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <Button Text="Get Playlists"
+                Command="{Binding GetPlaylistsCommand}"
+                IsEnabled="{Binding IsNotBusy}"
+                Grid.Row="1"
+                Margin="8"/>
+        
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
+                            IsRunning="{Binding IsBusy}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="CenterAndExpand"
+                            Grid.RowSpan="2"
+                            Grid.ColumnSpan="2"/>
+        
+    </Grid>
 </ContentPage>
