@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,25 +30,22 @@ public partial class PlaylistOverviewViewModel : BaseViewModel
         if (IsBusy)
             return;
 
+        IsBusy = true;
+
+        var playlists = new List<IPlaylist>();
+
         try
         {
-            IsBusy = true;
-            var playlists = await playlistService.GetPlaylists();
-
-            if (playlists.Count != 0)
-                Playlists.Clear();
-
-            foreach(var playlist in playlists)
-                Playlists.Add(playlist);
-        }
-        catch (Exception exception)
+            playlists = await playlistService.GetPlaylists();
+        } catch (Exception ex)
         {
-            Console.WriteLine(exception);
-            await Shell.Current.DisplayAlert("Error!", "Unable to fetch playlists", "Ok"); // TODO: abstraction
+            Debug.WriteLine(ex.Message);
+            await Shell.Current.DisplayAlert("Error!", "Unable to fetch playlists", "Ok");
         }
-        finally
-        {
-            IsBusy = false;
-        }
+
+        if (playlists.Count != 0)
+            Playlists.Clear();
+
+        IsBusy = false;
     }
 }
