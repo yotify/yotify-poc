@@ -5,12 +5,32 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Yotify"
     xmlns:view="clr-namespace:Yotify.View"
-    Shell.FlyoutBehavior="Disabled">
-
-    <ShellContent
-        Title="Yotify"
-        Shell.NavBarIsVisible="True"
-        ContentTemplate="{DataTemplate view:PlaylistOverview}"
-        Route="PlaylistOverview" />
-
+    Shell.FlyoutBehavior="Flyout">
+    <Shell.FlyoutIcon>
+        <FontImageSource Color="White" Size="24" />
+    </Shell.FlyoutIcon>
+    <Shell.FlyoutHeader>
+        <VerticalStackLayout HeightRequest="125">
+            <Label Text="Navigation Header" />
+        </VerticalStackLayout>
+    </Shell.FlyoutHeader>
+    <FlyoutItem Title="Home">
+        <ShellContent
+            Title="Home"
+            Shell.NavBarIsVisible="True"
+            Route="Home">
+            <ContentPage>
+                <VerticalStackLayout Padding="20">
+                    <Label Text="Home Content"/>
+                </VerticalStackLayout>
+            </ContentPage>
+        </ShellContent>
+    </FlyoutItem>
+    <FlyoutItem Title="Playlists">
+        <ShellContent
+            Title="PlaylistOverview"
+            Shell.NavBarIsVisible="True"
+            ContentTemplate="{DataTemplate view:PlaylistOverview}"
+            Route="PlaylistOverview" />
+    </FlyoutItem>
 </Shell>
